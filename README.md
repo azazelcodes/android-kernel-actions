@@ -92,8 +92,8 @@ For older Clang use v0.4.0 action version
 
 #### [AOSP's Clang](https://android.googlesource.com/platform/prebuilts/clang/host/linux-x86/)
 
-- `aosp-clang/<branch>/<clang version>`, `aosp-clang/<branch>/<clang version>/binutils`
-> Example : `aosp-clang/master/clang-r416183b`, `aosp-clang/android11-release/clang-r365631c/binutils`
+- `aosp-clang/<clang version>`, `aosp-clang/<clang version>/binutils`
+> Example : `aosp-clang/clang-r487747c`
 
 ## Example usage
 
