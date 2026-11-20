@@ -97,6 +97,8 @@ For older Clang use v0.4.0 action version
 
 ## Example usage
 
+### An updated example can be found in .github/workflows/example.yml
+
 ### With [`ncipollo/release-action`](https://github.com/ncipollo/release-action)
 ```yml
 name: Build on Tag

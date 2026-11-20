@@ -1,0 +1,50 @@
+name: Build Android
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout zipper
+        uses: actions/checkout@v5.0.0
+        with:
+          # clone your ak3 config
+          repository: azazelcodes/xz1c_AnyKernel3
+          path: zipper
+
+      - name: Cache
+        uses: actions/cache@v6
+        with:
+          path: .cache/
+          key: akc-cache
+
+      - name: Checkout kernel source
+        uses: actions/checkout@v5.0.0
+        with:
+          submodules: recursive
+          fetch-depth: 0
+          # choose branch to compile
+          ref: lineage-23.2
+
+      - name: Build kernel
+        uses: azazelcodes/android-kernel-actions@master
+        id: build
+        with:
+          # adapt this for your kernel
+          arch: arm64
+          compiler: aosp-clang/clang-r487747c
+          defconfig: lineage-msm8998-yoshino-lilac_defconfig
+          image: Image.gz-dtb
+
+      - name: Rename artifact
+        run: mv "${{ steps.build.outputs.outfile }}" lineage_23-2.zip
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v7
+        with:
+          path: lineage_23-2.zip
+          archive: false
+
+
