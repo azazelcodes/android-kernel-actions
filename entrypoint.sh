@@ -146,8 +146,9 @@ apt install -y --no-install-recommends git make bc bison openssl \
             
         aosp_clang_dl=true
         if [[ -d "$aosp_clang_dir" ]]; then
-            cver=$(awk 'NR == 2 { print $NF; exit }' "$aosp_clang_dir/AndroidVersion.txt" 2>/dev/null)
-            if [[ "$cver" == "$ver_number" ]]; then
+            cver=$(sed -n 's/^based on //p' "$aosp_clang_dir/AndroidVersion.txt")
+            echo "Checking requested $ver_number against clang-$cver"
+            if [[ "clang-$cver" == "$ver_number" ]]; then
                 echo "Using cached clang-$cver"
                 aosp_clang_dl=false
             else
